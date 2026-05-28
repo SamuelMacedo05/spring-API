@@ -1,6 +1,7 @@
-package com.JavaSpring.usuario.dto;
+package com.JavaSpring.usuario.business;
 
 import com.JavaSpring.usuario.converter.UsuarioConverter;
+import com.JavaSpring.usuario.dto.UsuarioDTO;
 import com.JavaSpring.usuario.infracture.entidy.Usuario;
 import com.JavaSpring.usuario.infracture.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
