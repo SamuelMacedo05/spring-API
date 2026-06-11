@@ -20,4 +20,21 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseEntity.ok(usuarioService.salvarUsuario(usuarioDTO));
     }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable String email){
+        usuarioService.deletarUsuarioporEmail(email);
+         return ResponseEntity.ok().build();
+
+    }
+
+    @GetMapping
+    public ResponseEntity<Usuario> BuscarUsuarioPorEmail(@RequestParam ("email") String email){
+        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
+    }
+
+    @PostMapping
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        return ResponseEntity.ok(usuarioService.salvarUsuario(usuarioDTO));
+    }
 }
