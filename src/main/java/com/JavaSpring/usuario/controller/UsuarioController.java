@@ -3,11 +3,10 @@ package com.JavaSpring.usuario.controller;
 
 import com.JavaSpring.usuario.business.UsuarioService;
 import com.JavaSpring.usuario.dto.UsuarioDTO;
+import com.JavaSpring.usuario.infracture.entidy.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario")
