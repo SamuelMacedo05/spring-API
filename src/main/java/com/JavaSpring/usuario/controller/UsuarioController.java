@@ -53,5 +53,13 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseEntity.ok(usuarioService.salvarUsuario(usuarioDTO));
+
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO dto,
+                                                       @RequestHeader ("Authorization") String token) {
+
+        return ResponseEntity.ok(usuarioService.atualizarDadosUsuario(token, dto));
     }
 }

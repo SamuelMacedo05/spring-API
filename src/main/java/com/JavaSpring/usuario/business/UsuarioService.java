@@ -6,7 +6,9 @@ import com.JavaSpring.usuario.exception.ConflictException;
 import com.JavaSpring.usuario.exception.ResourceNotException;
 import com.JavaSpring.usuario.infracture.entidy.Usuario;
 import com.JavaSpring.usuario.infracture.repository.UsuarioRepository;
+import com.JavaSpring.usuario.infracture.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,9 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioConverter usuarioConverter;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+
 
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
@@ -55,6 +60,27 @@ public class UsuarioService {
                 () -> new ResourceNotException("Email não encontrado" + email));
     }
 
+    public void deletarUsuarioPorEmail (String email){
+
+        usuarioRepository.deleteByEmail(email);
+    }
+    public boolean verificarExisteEmail(String email){
+        return usuarioRepository.existsByEmail(email);
+    }
+
+    public UsuarioDTO atualizarDadosUsuario(String token, UsuarioDTO dto) {
+
+        String email = jwtUtil.extrairEmailToken(token.substring(7));
+
+        Usuario usuarioEntity = usuarioRepository.findByEmail(email).orElseThrow(
+                ()-> new ResourceNotException("Email não encrontrado "));
+
+        Usuario usuario = usuarioConverter.updateUsuario(dto, usuarioEntity);
+        dto.setPassword(dto.getPassword() != null ? passwordEncoder.encode(dto.getPassword()) : null);
+
+        return usuarioConverter.paraUsuarioDTO(usuarioRepository.save(usuario));
+
+    }
 
 
 }
