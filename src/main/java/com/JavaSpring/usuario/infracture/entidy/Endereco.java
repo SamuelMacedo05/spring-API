@@ -25,11 +25,13 @@ public class Endereco {
     @Column(name = "cidade", length = 100)
     private String cidade;
     @Column(name = "numero", length = 100)
-    private long numero;
+    private Double numero;
     @Column(name = "complemento", length = 100)
     private String complemento;
     @Column(name = "cep", length = 100)
     private String cep;
+    @Column(name = "usuario_id")
+    private Long usuarioId;
 
 
 }

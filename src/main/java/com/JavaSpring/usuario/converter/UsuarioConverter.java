@@ -85,5 +85,66 @@ public class UsuarioConverter {
                 .build();
     }
 
+    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity){
+
+        return Usuario.builder()
+
+
+                .id(entity.getId())
+                .password(usuarioDTO.getPassword() != null ? usuarioDTO.getPassword() : entity.getPassword())
+                .name(usuarioDTO.getName() != null ? usuarioDTO.getName() : entity.getName())
+                .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : entity.getEmail())
+                .enderecos(entity.getEnderecos())
+                .telefones(entity.getTelefones())
+
+                .build();
+
+    }
+    public Endereco updateEndereco (EnderecoDTO dto, Endereco entity) {
+        return Endereco.builder()
+                .id(entity.getId())
+                .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
+                .rua(dto.getRua() != null ? dto.getRua() : entity.getRua())
+                .cidade(dto.getCidade() != null ? dto.getCidade() : entity.getCidade())
+                .cep(dto.getCep() != null ? dto.getCep(): entity.getCep())
+                .complemento(dto.getComplemento() != null ? dto.getComplemento() : entity.getComplemento())
+
+
+                .build();
+    }
+
+    public Telefone updateTelefone(TelefoneDTO dto, Telefone entity) {
+        return Telefone.builder()
+                .id(entity.getId())
+                .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
+                .ddd(dto.getDdd() != null ? dto.getDdd(): entity.getDdd())
+
+
+
+
+
+                .build();
+    }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idusuario) {
+        return Endereco.builder()
+                .cidade(dto.getCidade())
+                .complemento(dto.getComplemento())
+                .cep(dto.getCep())
+                .usuarioId(idusuario)
+
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO dto,Long idusuario) {
+        return Telefone.builder()
+                .usuarioId(idusuario)
+                .ddd(dto.getDdd())
+                .numero(dto.getNumero())
+
+
+                .build();
+    }
+
 
 }
