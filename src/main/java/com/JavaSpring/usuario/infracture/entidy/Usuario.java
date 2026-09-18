@@ -30,6 +30,8 @@ public class Usuario implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "usuario_id")
+    private Long usuarioId;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private List<Endereco> enderecos;
